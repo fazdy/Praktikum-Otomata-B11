@@ -1,96 +1,142 @@
-<![CDATA[# 📘 Praktikum Otomata — Kelompok B11
+<![CDATA[<div align="center">
 
-> **Departemen Teknik Informatika — Institut Teknologi Sepuluh Nopember 2026**
+# ⚙️ Praktikum Otomata
 
-Repository ini berisi kumpulan tugas Praktikum mata kuliah **Otomata Kelas B** yang dikerjakan oleh Kelompok B11.
+### Kelompok B11 · Otomata Kelas B
+
+**Departemen Teknik Informatika**  
+**Institut Teknologi Sepuluh Nopember**  
+**2026**
+
+![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Tkinter](https://img.shields.io/badge/GUI-Tkinter-FF6F00?style=for-the-badge)
+![License](https://img.shields.io/badge/License-Academic-green?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Completed-brightgreen?style=for-the-badge)
+
+---
+
+</div>
 
 ## 👥 Anggota Kelompok
 
-| Nama | NRP |
-|------|-----|
-| Kemal Tangguh Aji Rajasa | 5025231263 |
-| Achmad Najwa M | 5025231265 |
-| Faizal Aldy Armiriawan | 5025231266 |
+<div align="center">
+
+| No | Nama | NRP |
+|:--:|------|:---:|
+| 1 | **Kemal Tangguh Aji Rajasa** | `5025231263` |
+| 2 | **Achmad Najwa M** | `5025231265` |
+| 3 | **Faizal Aldy Armiriawan** | `5025231266` |
+
+</div>
 
 ---
 
-## 📂 Daftar Praktikum
+## 📂 Struktur Repository
 
-| Praktikum | Topik | File |
-|-----------|-------|------|
-| [Praktikum I](#-praktikum-i--lexical-recognizer) | Lexical Recognizer | `praktikum1.py` |
-| [Praktikum II](#-praktikum-ii--finite-state-machine-fsm) | Finite State Machine (FSM) | `praktikum2.py` |
+```
+📦 Praktikum-Otomata-B11
+├── 📄 README.md            ← Dokumentasi lengkap
+├── 🐍 praktikum1.py        ← Lexical Recognizer (GUI)
+├── 🐍 praktikum2.py        ← Finite State Machine (CLI)
+└── 📝 .gitignore
+```
 
 ---
 
-## 🛠️ Prasyarat
-
-- **Python 3.x**
-- Library bawaan: `tkinter`, `re`, `keyword`
+## 🛠️ Prasyarat & Instalasi
 
 ```bash
-# Cek versi Python
+# Pastikan Python 3.x sudah terinstal
 python3 --version
+
+# Clone repository ini
+git clone https://github.com/fazdy/Praktikum-Otomata-B11.git
+cd Praktikum-Otomata-B11
 ```
+
+> **Note:** Semua library yang digunakan (`tkinter`, `re`, `keyword`) merupakan library bawaan Python — tidak perlu instalasi tambahan.
 
 ---
 
-# 🔬 Praktikum I — Lexical Recognizer
+<div align="center">
 
-## 1. Tujuan
+# 📘 PRAKTIKUM I
 
-1. Mahasiswa memahami bahasa sebagai himpunan dan operasi-operasinya, serta cara mengenali anggota-anggota bahasa.
-2. Mahasiswa mengenal grammar sebagai himpunan sintaksis bahasa beserta cara kerjanya.
-3. Mahasiswa mampu merancang dan membuat program komputer (**Recognizer**) yang dapat membaca input program dan menghasilkan output berupa pengelompokan token berdasarkan sifat string tersebut.
+## Lexical Recognizer
 
-## 2. Landasan Teori
+*Pengenalan Token & Tokenisasi Source Code*
 
-### 2.1 Terminologi Bahasa dan Recognizer
+</div>
 
-Dalam teori otomata, terminologi bahasa dibangun dari struktur yang berhirarki:
+---
+
+### 🎯 Tujuan Praktikum
+
+1. Memahami **bahasa sebagai himpunan** dan operasi-operasinya, serta cara mengenali anggota-anggota bahasa.
+2. Mengenal **grammar** sebagai himpunan sintaksis bahasa beserta cara kerjanya.
+3. Mampu merancang dan membuat program **Recognizer** yang membaca input program dan menghasilkan output berupa **pengelompokan token**.
+
+---
+
+### 📖 Landasan Teori
+
+#### Terminologi Bahasa dan Recognizer
+
+Dalam teori otomata, terminologi bahasa dibangun secara **hierarkis**:
 
 ```
-Bahasa ──▶ Kalimat ──▶ Kata/String ──▶ Karakter (Alphabet + Digit + Symbol)
+📝 Bahasa
+ └── 📄 Kalimat
+      └── 🔤 Kata / String
+           └── 🔡 Karakter = Alphabet + Digit + Symbol
 ```
 
-Untuk mengetahui apakah sebuah input string merupakan anggota suatu bahasa tertentu atau tidak, diperlukan sebuah **Recognizer** atau **Finite Automata**. Recognizer akan melakukan penelusuran karakter per karakter dari string yang diinputkan.
+Sebuah **Recognizer** (Finite Automata) diperlukan untuk menelusuri karakter per karakter dari string input dan menentukan apakah string tersebut merupakan anggota suatu bahasa tertentu.
 
-### 2.2 Grammar
+#### Grammar
 
-Grammar adalah sebuah sistem matematis yang digunakan untuk mendefinisikan bahasa. Secara formal, sebuah grammar **G** memiliki 4 tupel **(V<sub>N</sub>, V<sub>T</sub>, S, θ)**:
+Grammar **G** didefinisikan sebagai 4 tupel **(V<sub>N</sub>, V<sub>T</sub>, S, θ)**:
 
 | Komponen | Keterangan |
-|----------|------------|
-| **V<sub>N</sub>** | Himpunan berhingga non-terminal |
-| **V<sub>T</sub>** | Himpunan berhingga terminal (angka, karakter, simbol, tanda baca) |
-| **S** | Start symbol (salah satu anggota V<sub>N</sub>) |
-| **θ** | Himpunan production |
+|:--------:|------------|
+| **V<sub>N</sub>** | Himpunan berhingga **non-terminal** |
+| **V<sub>T</sub>** | Himpunan berhingga **terminal** (angka, karakter, simbol) |
+| **S** | **Start symbol** (anggota V<sub>N</sub>) |
+| **θ** | Himpunan **production** |
 
-## 3. Perancangan Sistem
+---
 
-Program dirancang menggunakan **Python 3** dengan dukungan **Regular Expression (RegEx)** yang merepresentasikan cara kerja Finite Automata. Antarmuka pengguna menggunakan pustaka **tkinter**.
+### 🏗️ Perancangan Sistem
 
-Mesin Recognizer membagi token menjadi **empat kelompok utama**:
+Program menggunakan **Python 3** dengan **Regular Expression** sebagai mesin Finite Automata, dan **Tkinter** sebagai antarmuka GUI.
 
-| Kelompok | Metode Pengenalan |
-|----------|-------------------|
-| **Reserve Words** | Kata kunci bawaan Python (`keyword` module) + kata kunci umum (`int`, `float`, `public`, dll.) |
-| **Simbol & Tanda Baca** | Karakter simbolis seperti `(`, `)`, `[`, `]`, `;`, `,` |
-| **Variabel** | Kombinasi alfanumerik yang bukan reserve words |
-| **Kalimat Matematika** | Digit (angka) dan Symbol operasi matematika/logika |
+Token dikelompokkan ke dalam **4 kategori**:
 
-## 4. Cara Menjalankan
+| # | Kelompok Token | Metode Pengenalan |
+|:-:|----------------|-------------------|
+| 1 | **Reserve Words** | Kata kunci bawaan Python (`keyword` module) + tambahan (`int`, `float`, `public`, dll.) |
+| 2 | **Simbol & Tanda Baca** | Karakter simbolis: `( ) [ ] { } ; , .` |
+| 3 | **Variabel** | Kombinasi alfanumerik yang **bukan** reserve words |
+| 4 | **Kalimat Matematika** | Digit + operator matematika/logika |
+
+---
+
+### 🚀 Cara Menjalankan
 
 ```bash
 python3 praktikum1.py
 ```
 
-Setelah dijalankan, akan muncul jendela GUI. Masukkan source code pada area input, lalu klik tombol **"Jalankan Recognizer"**.
+Setelah dijalankan, masukkan source code pada area input, lalu klik tombol **"Jalankan Recognizer"**.
 
-## 5. Implementasi Kode
+---
+
+### 💻 Source Code
 
 <details>
-<summary>📄 Klik untuk melihat source code <code>praktikum1.py</code></summary>
+<summary><b>📄 Klik untuk melihat kode <code>praktikum1.py</code></b></summary>
+
+<br>
 
 ```python
 import tkinter as tk
@@ -151,7 +197,7 @@ def analyze_code():
         else:
             text_output.insert(tk.END, "(Tidak ditemukan)\n\n")
 
-# === KONFIGURASI USER INTERFACE (UI) ===
+# === KONFIGURASI USER INTERFACE ===
 root = tk.Tk()
 root.title("Lexical Recognizer - Praktikum Otomata")
 root.geometry("800x600")
@@ -184,13 +230,14 @@ root.mainloop()
 
 </details>
 
-## 6. Hasil Pengujian
+---
 
-### Skenario 1 — Struktur Data List dan Perulangan
+### 🧪 Hasil Pengujian
 
-Menguji pengenalan simbol array/list dan reserve words perulangan (`for`, `in`).
+#### Skenario 1 — Struktur Data List dan Perulangan
 
-**Input:**
+> Menguji kemampuan program mengenali simbol array/list dan reserve words perulangan (`for`, `in`).
+
 ```python
 data_angka = [10, 20, 30]
 total = 0
@@ -198,11 +245,10 @@ for x in data_angka:
     total += x
 ```
 
-### Skenario 2 — Pendefinisian Class dan Exception Handling
+#### Skenario 2 — Class dan Exception Handling
 
-Menguji pengenalan keyword OOP dan penanganan eksepsi.
+> Menguji pengenalan keyword OOP (`class`, `def`) dan penanganan eksepsi (`try`, `except`).
 
-**Input:**
 ```python
 class Kalkulator:
     def bagi(self, a, b):
@@ -212,22 +258,20 @@ class Kalkulator:
             return 0.0
 ```
 
-### Skenario 3 — Pemanggilan Modul dan Akses Properti
+#### Skenario 3 — Pemanggilan Modul dan Akses Properti
 
-Menguji pemisahan tanda titik (`.`) sebagai simbol tanda baca saat mengakses properti modul.
+> Menguji pemisahan tanda titik (`.`) sebagai simbol saat mengakses properti modul.
 
-**Input:**
 ```python
 import math
 jari_jari = 7
 luas = math.pi * (jari_jari * jari_jari)
 ```
 
-### Skenario 4 — Operasi Logika dan Komparasi Majemuk
+#### Skenario 4 — Operasi Logika dan Komparasi Majemuk
 
-Memastikan program membedakan kata kunci logika Python dengan variabel biasa.
+> Memastikan program membedakan kata kunci logika Python dengan variabel biasa.
 
-**Input:**
 ```python
 is_valid = True
 batas_bawah = -10
@@ -235,81 +279,109 @@ while is_valid and (batas_bawah <= 0):
     batas_bawah += 2
 ```
 
-## 7. Analisis Hasil
+---
 
-| Aspek | Hasil |
-|-------|-------|
-| **Pemisahan Entitas Leksikal** | Program mampu memisahkan Reserve Words bawaan Python 3 (`for`, `in`, `class`, `def`) dari variabel kustom (`data_angka`, `Kalkulator`) |
-| **Pengenalan Simbol & Angka Desimal** | Karakter simbolis (`[`, `:`) masuk ke "Simbol dan Tanda Baca"; operator majemuk (`+=`) dan angka desimal (`0.0`) masuk ke "Kalimat Matematika" |
-| **Penanganan Simbol Khusus** | Titik (`.`) diidentifikasi sebagai Punctuation (bukan desimal) saat berada di antara dua string (`math.pi`). Bilangan negatif (`-10`) dan komparasi (`<=`) ditangani dengan tepat |
+### 📊 Analisis Hasil
 
-## 8. Kesimpulan
+| Aspek Pengujian | Hasil |
+|-----------------|-------|
+| **Pemisahan Entitas Leksikal** | ✅ Reserve Words (`for`, `in`, `class`, `def`) berhasil dipisahkan dari variabel kustom (`data_angka`, `Kalkulator`) |
+| **Pengenalan Simbol & Desimal** | ✅ Karakter simbolis (`[`, `:`) → Simbol; operator (`+=`) dan desimal (`0.0`) → Kalimat Matematika |
+| **Penanganan Simbol Khusus** | ✅ Titik (`.`) diidentifikasi sebagai Punctuation saat di antara dua identifier (`math.pi`). Bilangan negatif (`-10`) dan komparasi (`<=`) ditangani tepat |
 
-Praktikum ini berhasil mengimplementasikan sebuah **Lexical Recognizer** sederhana. Tahap awal pengenalan bahasa sangat bergantung pada ketepatan pendefinisian simbol terminal. Mesin Recognizer berjalan linier meniru konsep Finite Automata, menelusuri karakter dari kiri ke kanan, dan mengelompokkannya sesuai teori **Hirarki Chomsky**.
+### 📌 Kesimpulan
+
+Program **Lexical Recognizer** berhasil diimplementasikan menggunakan Regular Expression sebagai mesin Finite Automata. Recognizer berjalan **linier dari kiri ke kanan**, menelusuri karakter per karakter, dan mengelompokkan token dengan akurasi sesuai teori **Hirarki Chomsky**.
 
 ---
 
-# 🔬 Praktikum II — Finite State Machine (FSM)
+<div align="center">
 
-## 1. Tujuan
+# 📗 PRAKTIKUM II
 
-1. Mahasiswa memahami bahasa sebagai himpunan dan operasi-operasinya, serta cara mengenali anggota-anggota bahasa.
-2. Mahasiswa mengenal grammar sebagai himpunan sintaksis bahasa beserta cara kerjanya.
-3. Mahasiswa mampu merancang dan membuat program komputer (**Recognizer**) yang dapat membaca input program dan menghasilkan output berupa pengelompokan token berdasarkan sifat string tersebut.
+## Finite State Machine (FSM)
 
-## 2. Landasan Teori
+*Pengenalan Bahasa Formal dengan Mesin State Berhingga*
 
-### 2.1 Terminologi Bahasa dan Recognizer
+</div>
 
-Sama seperti Praktikum I, terminologi bahasa dibangun dari struktur yang berhirarki. Recognizer atau Finite Automata diperlukan untuk menelusuri karakter per karakter dari string input.
+---
 
-### 2.2 Bahasa L = { x ∈ (0+1)* }
+### 🎯 Tujuan Praktikum
 
-Notasi matematis:
+1. Memahami **bahasa sebagai himpunan** dan operasi-operasinya, serta cara mengenali anggota-anggota bahasa.
+2. Mengenal **grammar** sebagai himpunan sintaksis bahasa beserta cara kerjanya.
+3. Mampu merancang **Recognizer** berbasis FSM yang memvalidasi string terhadap aturan bahasa formal.
+
+---
+
+### 📖 Landasan Teori
+
+#### Bahasa yang Dikenali
 
 ```
 L = { x ∈ (0+1)* | karakter terakhir x adalah 1 DAN x tidak memiliki substring "00" }
 ```
 
-FSM yang dirancang berfungsi sebagai **alat penyaring (filter)**. Dari himpunan tak terhingga string `(0+1)*`, FSM akan **menerima** string yang memenuhi kedua syarat dan **menolak** yang tidak memenuhi.
+FSM berfungsi sebagai **filter** — dari himpunan tak terhingga string biner `(0+1)*`, mesin hanya **menerima** string yang memenuhi **kedua syarat** di atas.
 
-## 3. Perancangan Sistem
+---
 
-### Diagram Transisi State
+### 🏗️ Perancangan Sistem
+
+#### Diagram Transisi State
 
 ```
-         0           1
-  ┌──── [S] ────────[B] ◀──┐
-  │      │           ▲  │   │
-  ▼      │     1     │  │ 1 │
- [A] ────┘───────────┘  └───┘
+                ┌─────── 1 ───────┐
+                │                 ▼
+         0    ┌───┐     1      ╔═══╗
+  ┌─── [START]│ S │──────────▶║ B ║◀──┐
+  │           └───┘            ╚═══╝   │
+  │                              │     │ 1
+  ▼          1                   │ 0   │
+┌───┐  ──────────────────────┘   │     │
+│ A │────────────────────────────┘   ──┘
+└───┘
   │
   │ 0
   ▼
- [C] ◀──┐
-  │  │   │
-  │  └───┘  (trap state, 0 dan 1 tetap di C)
+┌───┐ 0,1
+│ C │◀────┐
+└───┘─────┘
+ TRAP
 ```
 
-| State | Input `0` | Input `1` | Keterangan |
-|-------|-----------|-----------|------------|
-| **S** (start) | A | B | State awal |
-| **A** | C | B | Sudah baca satu `0` |
-| **B** (accept) | A | B | ✅ Final state |
-| **C** (trap) | C | C | ❌ Jebakan (ada `00`) |
+#### Tabel Transisi
 
-## 4. Cara Menjalankan
+<div align="center">
+
+| State | Input `0` | Input `1` | Keterangan |
+|:-----:|:---------:|:---------:|------------|
+| **S** | A | **B** | 🟢 Start state |
+| **A** | C | **B** | Sudah membaca satu `0` |
+| **B** | A | **B** | ✅ **Accept state** (final) |
+| **C** | C | C | ❌ **Trap state** (jebakan) |
+
+</div>
+
+---
+
+### 🚀 Cara Menjalankan
 
 ```bash
 python3 praktikum2.py
 ```
 
-Program berjalan secara interaktif di terminal. Masukkan string biner untuk diuji, ketik `keluar` untuk menghentikan.
+Program berjalan **interaktif di terminal**. Masukkan string biner untuk diuji, ketik `keluar` untuk berhenti.
 
-## 5. Implementasi Kode
+---
+
+### 💻 Source Code
 
 <details>
-<summary>📄 Klik untuk melihat source code <code>praktikum2.py</code></summary>
+<summary><b>📄 Klik untuk melihat kode <code>praktikum2.py</code></b></summary>
+
+<br>
 
 ```python
 class FSM:
@@ -318,7 +390,6 @@ class FSM:
         self.accept_states = {'B'}
         self.current_state = self.start_state
 
-        # Tabel transisi (Dictionary)
         self.transitions = {
             'S': {'0': 'A', '1': 'B'},
             'A': {'0': 'C', '1': 'B'},
@@ -384,43 +455,70 @@ if __name__ == "__main__":
 
 </details>
 
-## 6. Hasil Pengujian
+---
 
-### ✅ String Diterima (Berhenti di State B)
+### 🧪 Hasil Pengujian
 
-| Input | State Akhir | Keterangan |
-|-------|-------------|------------|
-| `101` | B | Kasus dasar valid |
-| `11` | B | Kasus dasar valid |
-| `01` | B | Kasus dasar valid |
-| `10101101010101111010101010101010101` | B | Stress test — stabil meskipun string sangat panjang |
+#### ✅ String Diterima — Berhenti di State B
 
-### ❌ String Ditolak (Berhenti di State C — Trap State)
+<div align="center">
 
-| Input | State Akhir | Keterangan |
-|-------|-------------|------------|
-| `1001` | C | Meskipun diakhiri `1`, substring `00` terdeteksi → langsung ke trap state |
-| `100001011100101001` | C | Urutan panjang `0` berturut-turut langsung mengarahkan ke State C |
+| Input | State Akhir | Alasan Diterima |
+|:-----:|:-----------:|-----------------|
+| `101` | **B** | Tidak ada `00`, diakhiri `1` |
+| `11` | **B** | Tidak ada `00`, diakhiri `1` |
+| `01` | **B** | Tidak ada `00`, diakhiri `1` |
+| `10101101...010101` | **B** | Stress test — stabil meskipun string sangat panjang |
 
-### ❌ String Ditolak (Berhenti di State A)
+</div>
 
-| Input | State Akhir | Keterangan |
-|-------|-------------|------------|
-| `0` | A | Tidak mengandung `00`, tetapi tidak diakhiri `1` → bukan accept state |
+#### ❌ String Ditolak — Berhenti di State C *(Trap State)*
 
-## 7. Analisis Hasil
+<div align="center">
 
-- **State B (Accept):** Semua input yang berhenti di State B terbukti memenuhi kedua syarat — tidak ada `00` dan diakhiri `1`. Stress test dengan string panjang membuktikan stabilitas iterasi transisi.
-- **State C (Trap):** Berfungsi sebagai jebakan untuk pelanggaran substring `00`. Setelah masuk State C, semua input selanjutnya diabaikan dan status dikunci pada **Ditolak**.
-- **State A (Non-accept):** String yang valid dari segi aturan pertama (tidak ada `00`) tetapi tidak memenuhi aturan akhiran `1` akan ditolak karena State A bukan accept state.
+| Input | State Akhir | Alasan Ditolak |
+|:-----:|:-----------:|----------------|
+| `1001` | **C** | Diakhiri `1`, tetapi substring `00` terdeteksi → trap |
+| `100001011100101001` | **C** | Urutan `0` berturut langsung mengarahkan ke trap |
 
-## 8. Kesimpulan
+</div>
 
-Praktikum ini berhasil mengimplementasikan sebuah **Finite State Machine (FSM)** untuk bahasa `L = { x ∈ (0+1)* | diakhiri '1' & tidak ada substring '00' }`. FSM dirancang dengan 4 state (S, A, B, C) dimana State C berfungsi sebagai trap state. Program terbukti mampu menyaring string dengan akurasi tinggi sesuai spesifikasi bahasa formal yang diberikan.
+#### ❌ String Ditolak — Berhenti di State A
+
+<div align="center">
+
+| Input | State Akhir | Alasan Ditolak |
+|:-----:|:-----------:|----------------|
+| `0` | **A** | Tidak ada `00`, tetapi **tidak diakhiri `1`** → bukan accept state |
+
+</div>
 
 ---
 
-## 📝 Lisensi
+### 📊 Analisis Hasil
 
-Proyek ini dibuat untuk keperluan akademik Praktikum Otomata — Departemen Teknik Informatika ITS 2026.
+| State Akhir | Evaluasi |
+|:-----------:|----------|
+| **State B** *(Accept)* | ✅ Semua string yang berhenti di B memenuhi kedua syarat. Stress test membuktikan **stabilitas iterasi transisi** |
+| **State C** *(Trap)* | ❌ Berfungsi sebagai jebakan untuk pelanggaran `00`. Setelah masuk C, **semua input selanjutnya diabaikan** |
+| **State A** *(Non-accept)* | ❌ String valid tanpa `00` tetapi tidak diakhiri `1` → ditolak karena A **bukan accept state** |
+
+### 📌 Kesimpulan
+
+Program **Finite State Machine** berhasil mengimplementasikan bahasa `L = { x ∈ (0+1)* | diakhiri '1' & tidak ada substring '00' }`. FSM dirancang dengan **4 state** (S, A, B, C) dimana State C sebagai *trap state*. Program terbukti mampu menyaring string dengan **akurasi tinggi** sesuai spesifikasi bahasa formal.
+
+---
+
+<div align="center">
+
+### 📝 Lisensi
+
+Proyek ini dibuat untuk keperluan akademik  
+**Praktikum Otomata · Departemen Teknik Informatika · ITS 2026**
+
+---
+
+*Made with ❤️ by Kelompok B11*
+
+</div>
 ]]>
