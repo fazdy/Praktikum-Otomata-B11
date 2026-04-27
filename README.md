@@ -1,11 +1,11 @@
-<![CDATA[<div align="center">
+<div align="center">
 
 # ⚙️ Praktikum Otomata
 
 ### Kelompok B11 · Otomata Kelas B
 
-**Departemen Teknik Informatika**  
-**Institut Teknologi Sepuluh Nopember**  
+**Departemen Teknik Informatika**
+**Institut Teknologi Sepuluh Nopember**
 **2026**
 
 ![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge&logo=python&logoColor=white)
@@ -95,13 +95,13 @@ Sebuah **Recognizer** (Finite Automata) diperlukan untuk menelusuri karakter per
 
 #### Grammar
 
-Grammar **G** didefinisikan sebagai 4 tupel **(V<sub>N</sub>, V<sub>T</sub>, S, θ)**:
+Grammar **G** didefinisikan sebagai 4 tupel **(VN, VT, S, θ)**:
 
 | Komponen | Keterangan |
 |:--------:|------------|
-| **V<sub>N</sub>** | Himpunan berhingga **non-terminal** |
-| **V<sub>T</sub>** | Himpunan berhingga **terminal** (angka, karakter, simbol) |
-| **S** | **Start symbol** (anggota V<sub>N</sub>) |
+| **VN** | Himpunan berhingga **non-terminal** |
+| **VT** | Himpunan berhingga **terminal** (angka, karakter, simbol) |
+| **S** | **Start symbol** (anggota VN) |
 | **θ** | Himpunan **production** |
 
 ---
@@ -134,7 +134,7 @@ Setelah dijalankan, masukkan source code pada area input, lalu klik tombol **"Ja
 ### 💻 Source Code
 
 <details>
-<summary><b>📄 Klik untuk melihat kode <code>praktikum1.py</code></b></summary>
+<summary><b>📄 Klik untuk melihat kode praktikum1.py</b></summary>
 
 <br>
 
@@ -379,7 +379,7 @@ Program berjalan **interaktif di terminal**. Masukkan string biner untuk diuji, 
 ### 💻 Source Code
 
 <details>
-<summary><b>📄 Klik untuk melihat kode <code>praktikum2.py</code></b></summary>
+<summary><b>📄 Klik untuk melihat kode praktikum2.py</b></summary>
 
 <br>
 
@@ -513,7 +513,7 @@ Program **Finite State Machine** berhasil mengimplementasikan bahasa `L = { x �
 
 ### 📝 Lisensi
 
-Proyek ini dibuat untuk keperluan akademik  
+Proyek ini dibuat untuk keperluan akademik
 **Praktikum Otomata · Departemen Teknik Informatika · ITS 2026**
 
 ---
@@ -521,4 +521,3 @@ Proyek ini dibuat untuk keperluan akademik
 *Made with ❤️ by Kelompok B11*
 
 </div>
-]]>
